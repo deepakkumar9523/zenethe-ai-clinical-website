@@ -353,9 +353,7 @@ export default function GuidedSimulation() {
                     
                     <div className="space-y-3">
                       {[
-                        "Trending regional outbreaks matching this presentation?",
-                        "Standard protocol for febrile jaundice with encephalopathy",
-                        "Drug contraindications in CKD patients"
+                        "Regional outbreaks with this presentation?", "Protocol for febrile jaundice + encephalopathy", "Drug contraindications in CKD"
                       ].map((query, index) => (
                         <Button
                           key={index}
@@ -390,7 +388,7 @@ export default function GuidedSimulation() {
                           <div className="min-w-0 flex-1">
                             <h4 className="font-semibold mb-2 text-gray-900 text-sm sm:text-base">Differential Considerations</h4>
                             <ul className="space-y-1 text-xs sm:text-sm text-gray-700">
-                              <li className="break-words">• Nipah-like encephalitis (recent regional cases)</li>
+                              <li className="break-words">• Nipah-like encephalitis (recent cases)</li>
                               <li className="break-words">• Scrub Typhus (high seasonal prevalence)</li>
                               <li className="break-words">• Leptospirosis (monsoon exposure pattern)</li>
                             </ul>
@@ -432,7 +430,7 @@ export default function GuidedSimulation() {
                         Context-Aware Actions
                       </h3>
                       <p className="text-sm sm:text-base text-gray-600 mb-4">
-                        Based on the updated patient information, explore these evidence-based options:
+                        Based on updated info, explore evidence-based options:
                       </p>
                     </div>
                     
