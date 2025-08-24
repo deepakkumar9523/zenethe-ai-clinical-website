@@ -96,20 +96,20 @@ export default function GuidedSimulation() {
     {
       id: "demo-2", 
       type: "assistant",
-      content: "Based on the clinical presentation and regional context, I'm analyzing several key differentials:\n\n• **Nipah-like encephalitis** - Recent regional cases reported\n• **Scrub Typhus** - High seasonal prevalence in Jharkhand\n• **Leptospirosis** - Monsoon exposure pattern\n• **Bacterial meningitis** - Cannot rule out completely\n\nGiven the CKD history, drug selection will be critical.",
+      content: "Based on the clinical presentation and regional context, I'm analyzing several key differentials:\n\n• Nipah-like encephalitis - Recent regional cases reported\n• Scrub Typhus - High seasonal prevalence in Jharkhand\n• Leptospirosis - Monsoon exposure pattern\n• Bacterial meningitis - Cannot rule out completely\n\nGiven the CKD history, drug selection will be critical.",
       timestamp: new Date(),
       sources: ["PubMed", "ICMR Guidelines", "Regional Health Data"]
     },
     {
       id: "demo-3",
       type: "system",
-      content: "🚨 **Safety Alert**: Potential drug interaction detected with current medications",
+      content: "🚨 Safety Alert: Potential drug interaction detected with current medications",
       timestamp: new Date(),
     },
     {
       id: "demo-4",
       type: "assistant",
-      content: "**Recommended Treatment Approach:**\n\n✅ **Safe**: IV Doxycycline 100mg BID\n⚠️ **Avoid**: Azithromycin + Atorvastatin (rhabdomyolysis risk in CKD)\n\n**Action**: Hold statin therapy temporarily, monitor renal function closely.",
+      content: "Recommended Treatment Approach:\n\n✅ Safe: IV Doxycycline 100mg BID\n⚠️ Avoid: Azithromycin + Atorvastatin (rhabdomyolysis risk in CKD)\n\nAction: Hold statin therapy temporarily, monitor renal function closely.",
       timestamp: new Date(),
       sources: ["DOAJ", "MedlinePlus", "Drug Interaction Database"]
     }
