@@ -1,5 +1,6 @@
 import NavBar from "@/components/NavBar"
 import Hero from "@/components/Hero"
+import { DoctorCarousel } from "@/components/PhotoCarousel"
 import Challenge from "@/components/Challenge"
 import GuidedSimulation from "@/components/GuidedSimulation"
 import TrustedSources from "@/components/TrustedSources"
@@ -24,6 +25,9 @@ export default function HomePage() {
       <main id="main-content" role="main">
         {/* Hero Section - Full viewport */}
         <Hero className="pt-16" />
+
+        {/* Doctor Photo Carousel - Stylish showcase */}
+        <DoctorCarousel />
 
         {/* Challenge Section - Spaced container */}
         <section className="py-20 bg-card">
