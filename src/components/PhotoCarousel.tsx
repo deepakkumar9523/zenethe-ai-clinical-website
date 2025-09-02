@@ -74,7 +74,7 @@ export const DoctorCarousel = () => {
   useEffect(() => {
     if (!isPlaying) return;
 
-    const interval = setInterval(nextSlide, 5000);
+    const interval = setInterval(nextSlide, 4000);
     return () => clearInterval(interval);
   }, [isPlaying, nextSlide]);
 
@@ -85,15 +85,12 @@ export const DoctorCarousel = () => {
         prevSlide();
       } else if (event.key === 'ArrowRight') {
         nextSlide();
-      } else if (event.key === ' ') {
-        event.preventDefault();
-        setIsPlaying(!isPlaying);
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [nextSlide, prevSlide, isPlaying]);
+  }, [nextSlide, prevSlide]);
 
   // Touch handlers
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -120,62 +117,58 @@ export const DoctorCarousel = () => {
   };
 
   return (
-    <section className="py-24 bg-white">
+    <section className="py-32 bg-gradient-to-b from-white to-gray-50/50">
       <div className="container mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-20">
           <motion.h2 
-            className="text-4xl md:text-5xl font-display font-bold text-slate-900 mb-6"
+            className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            Trusted by Doctors Worldwide
+            Trusted by Doctors
           </motion.h2>
           <motion.p 
-            className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed font-light"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            Healthcare professionals across the globe rely on our AI-powered RAG technology 
-            to enhance patient care, streamline workflows, and make more informed clinical decisions.
+            Healthcare professionals worldwide use our AI RAG technology 
+            to enhance patient care and clinical decision-making.
           </motion.p>
         </div>
 
-        {/* Carousel Container */}
+        {/* Modern Card-Based Carousel */}
         <motion.div 
-          className="relative max-w-6xl mx-auto"
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          className="relative max-w-7xl mx-auto"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
           onMouseEnter={() => setIsPlaying(false)}
           onMouseLeave={() => setIsPlaying(true)}
-          role="region"
-          aria-label="Doctor testimonial carousel"
         >
-          {/* Main Carousel */}
+          {/* Main Carousel Container */}
           <div 
-            className="relative overflow-hidden rounded-2xl shadow-2xl bg-white"
+            className="relative overflow-hidden rounded-3xl bg-white shadow-xl shadow-gray-200/50 border border-gray-100"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
-            <div className="relative aspect-[16/10] md:aspect-[16/9]">
+            <div className="relative aspect-[16/9] lg:aspect-[20/9]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentIndex}
-                  initial={{ opacity: 0, x: 300 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -300 }}
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ 
-                    type: "spring", 
-                    stiffness: 300, 
-                    damping: 30,
-                    duration: 0.6 
+                    duration: 0.7,
+                    ease: [0.25, 0.46, 0.45, 0.94]
                   }}
                   className="absolute inset-0"
                 >
@@ -185,20 +178,23 @@ export const DoctorCarousel = () => {
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                   
-                  {/* Caption */}
+                  {/* Modern Caption Card */}
                   {carouselImages[currentIndex].caption && (
                     <motion.div 
-                      className="absolute bottom-6 left-6 right-6"
-                      initial={{ opacity: 0, y: 20 }}
+                      className="absolute bottom-8 left-8 right-8 lg:bottom-12 lg:left-12 lg:right-1/2"
+                      initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.3 }}
+                      transition={{ delay: 0.4, duration: 0.6 }}
                     >
-                      <div className="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-4 shadow-lg">
-                        <h3 className="text-lg font-semibold text-slate-900">
+                      <div className="bg-white/95 backdrop-blur-xl rounded-2xl p-6 lg:p-8 shadow-2xl border border-white/20">
+                        <h3 className="text-2xl lg:text-3xl font-semibold text-gray-900 mb-2">
                           {carouselImages[currentIndex].caption}
                         </h3>
+                        <p className="text-gray-600 text-sm lg:text-base font-light">
+                          Empowering healthcare with AI-driven insights
+                        </p>
                       </div>
                     </motion.div>
                   )}
@@ -206,84 +202,68 @@ export const DoctorCarousel = () => {
               </AnimatePresence>
             </div>
 
-            {/* Navigation Arrows */}
-            <button
-              onClick={prevSlide}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 transition-all duration-200 hover:scale-110 group"
-              aria-label="Previous image"
-            >
-              <ChevronLeft className="h-6 w-6 text-slate-700 group-hover:text-blue-600 transition-colors" />
-            </button>
+            {/* Minimal Navigation */}
+            <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between pointer-events-none px-6 lg:px-8">
+              <motion.button
+                onClick={prevSlide}
+                className="pointer-events-auto w-12 h-12 lg:w-14 lg:h-14 bg-white/90 hover:bg-white backdrop-blur-xl rounded-full shadow-xl border border-white/20 flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label="Previous image"
+              >
+                <ChevronLeft className="h-5 w-5 lg:h-6 lg:w-6 text-gray-700 group-hover:text-blue-600 transition-colors" />
+              </motion.button>
 
-            <button
-              onClick={nextSlide}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 transition-all duration-200 hover:scale-110 group"
-              aria-label="Next image"
-            >
-              <ChevronRight className="h-6 w-6 text-slate-700 group-hover:text-blue-600 transition-colors" />
-            </button>
-
-            {/* Play/Pause Indicator */}
-            <div className="absolute top-4 right-4 z-10">
-              <div className={`w-3 h-3 rounded-full transition-colors duration-300 ${
-                isPlaying ? 'bg-green-500' : 'bg-yellow-500'
-              }`}>
-                <div className="sr-only">
-                  {isPlaying ? 'Auto-play enabled' : 'Auto-play paused'}
-                </div>
-              </div>
+              <motion.button
+                onClick={nextSlide}
+                className="pointer-events-auto w-12 h-12 lg:w-14 lg:h-14 bg-white/90 hover:bg-white backdrop-blur-xl rounded-full shadow-xl border border-white/20 flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label="Next image"
+              >
+                <ChevronRight className="h-5 w-5 lg:h-6 lg:w-6 text-gray-700 group-hover:text-blue-600 transition-colors" />
+              </motion.button>
             </div>
           </div>
 
-          {/* Navigation Dots */}
-          <div className="flex justify-center items-center mt-8 space-x-3">
+          {/* Modern Dot Navigation */}
+          <div className="flex justify-center items-center mt-8 space-x-2">
             {carouselImages.map((_, index) => (
-              <button
+              <motion.button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`transition-all duration-300 rounded-full ${
+                className={`transition-all duration-500 rounded-full ${
                   index === currentIndex
-                    ? 'w-8 h-3 bg-blue-600'
-                    : 'w-3 h-3 bg-slate-300 hover:bg-slate-400'
+                    ? 'w-8 h-2 bg-blue-600'
+                    : 'w-2 h-2 bg-gray-300 hover:bg-gray-400'
                 }`}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
                 aria-label={`Go to slide ${index + 1}`}
                 aria-current={index === currentIndex ? 'true' : 'false'}
               />
             ))}
           </div>
 
-          {/* Progress Bar */}
-          <div className="mt-6 w-full bg-slate-200 rounded-full h-1 overflow-hidden">
-            <motion.div
-              className="h-full bg-blue-600"
-              initial={{ width: "0%" }}
-              animate={{ width: `${((currentIndex + 1) / carouselImages.length) * 100}%` }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-            />
+          {/* Subtle Progress Indicator */}
+          <div className="mt-8 w-full max-w-md mx-auto">
+            <div className="h-0.5 bg-gray-200 rounded-full overflow-hidden">
+              <motion.div
+                className="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"
+                initial={{ width: "0%" }}
+                animate={{ width: `${((currentIndex + 1) / carouselImages.length) * 100}%` }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+              />
+            </div>
+            <div className="flex justify-between items-center mt-3">
+              <span className="text-sm font-medium text-gray-900">
+                {String(currentIndex + 1).padStart(2, '0')}
+              </span>
+              <span className="text-sm text-gray-500">
+                of {String(carouselImages.length).padStart(2, '0')}
+              </span>
+            </div>
           </div>
-
-          {/* Slide Counter */}
-          <div className="text-center mt-4">
-            <span className="text-sm text-slate-500">
-              {currentIndex + 1} of {carouselImages.length}
-            </span>
-          </div>
-        </motion.div>
-
-        {/* Instructions */}
-        <motion.div 
-          className="text-center mt-8 text-sm text-slate-500"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          viewport={{ once: true }}
-        >
-          <p className="hidden md:block">
-            Use arrow keys to navigate • Hover to pause auto-play
-          </p>
-          <p className="md:hidden">
-            Swipe to navigate • Tap to pause
-          </p>
         </motion.div>
       </div>
     </section>
